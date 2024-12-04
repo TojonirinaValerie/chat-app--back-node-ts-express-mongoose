@@ -1,8 +1,9 @@
 import { Request, Response, NextFunction } from "express";
 import HttpService from "../service/httpService";
-import UserModel from "../models/user.model";
+import UserModel, { IUser } from "../models/user.model";
 import jwt from "jsonwebtoken";
 import { verifyValidityToken } from "../service/utils";
+import { Types } from "mongoose";
 
 export const checkDuplicatePseudo = async (
   req: Request,
@@ -83,6 +84,26 @@ export const verifyToken = (
       req.body.user = user;
       next();
     });
+  } catch (e) {
+    console.log(e);
+    HttpService.serverError(res);
+    return;
+  }
+};
+
+export const findUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const user = req.body.user as IUser;
+    const find = await UserModel.findOne({ _id: new Types.ObjectId(user._id) });
+    if (!find) {
+      HttpService.sendResponse(res, 404, false, "Utilisateur non trouvé");
+      return;
+    }
+    next();
   } catch (e) {
     console.log(e);
     HttpService.serverError(res);

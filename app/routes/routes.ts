@@ -4,6 +4,7 @@ import { login, refresh, register } from "../controllers/auth";
 import {
   checkBodyData,
   checkDuplicatePseudo,
+  findUser,
   verifyToken,
 } from "../middlewares/auth.middleware";
 import privateRoute from "./privateRoute";
@@ -24,8 +25,8 @@ router.post(
   register
 );
 router.post("/signin", [checkBodyData(["pseudo", "password"])], login);
-router.get("/refresh-token", [verifyToken], refresh);
+router.get("/refresh-token", [verifyToken, findUser], refresh);
 
-router.use([verifyToken], privateRoute);
+router.use([verifyToken, findUser], privateRoute);
 
 export default router;
