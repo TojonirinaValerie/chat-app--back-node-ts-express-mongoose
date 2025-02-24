@@ -1,15 +1,18 @@
-import mongoose from "mongoose";
+import mongoose, { ConnectOptions } from "mongoose";
 
-const dbName = process.env.DB_NAME;
 const dbHost = process.env.DB_HOST;
-const dbPort = process.env.DB_PORT;
+const dbPassword = process.env.DB_PASSWORD;
+
+const uri = `mongodb+srv://${dbHost}:${dbPassword}@chat-app.qrrr8.mongodb.net/?retryWrites=true&w=majority&appName=chat-app`;
+
+const clientOptions : ConnectOptions = { serverApi: { version: '1', strict: true, deprecationErrors: true } };
 
 const databaseConnection = async () => {
   try {
-    await mongoose.connect(`mongodb://${dbHost}:${dbPort}/${dbName}`);
-    console.log("==================================================");
-    console.log("MongoDB connected");
-    console.log("==================================================");
+    // Create a Mongoose client with a MongoClientOptions object to set the Stable API version
+    await mongoose.connect(uri, clientOptions);
+    await mongoose.connection.db?.admin().command({ ping: 1 });
+    console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } catch (err) {
     console.error("MongoDB connection error:", err);
     process.exit(1);
