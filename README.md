@@ -3,16 +3,14 @@
 Live demo: [https://chat-app-front-react-ts.onrender.com](https://chat-app-front-react-ts.onrender.com)
 
 Compte pour test:
-1.
-pseudo: Tojonirina
+
+1- Pseudo: Tojonirina<br>
 Mot de passe: Tojo1234
 
-2.
-pseudo: JeanPaul
+2- Pseudo: JeanPaul<br>
 Mot de passe: Jean1234
 
-3.
-pseudo: MaxV
+3- Pseudo: MaxV<br>
 Mot de passe: MaxV1234
 
 ## Description
