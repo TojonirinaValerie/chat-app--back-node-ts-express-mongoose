@@ -3,3 +3,7 @@ uploads
 files
 node_modules
 /build
+.env
+.env.local
+.env.development
+.env.production
