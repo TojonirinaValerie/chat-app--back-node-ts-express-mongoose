@@ -1,9 +1,9 @@
 import mongoose, { ConnectOptions } from "mongoose";
 
-const dbHost = process.env.DB_HOST;
-const dbPassword = process.env.DB_PASSWORD;
-
-const uri = `mongodb+srv://${dbHost}:${dbPassword}@chat-app.qrrr8.mongodb.net/?retryWrites=true&w=majority&appName=chat-app`;
+// const dbHost = process.env.DB_HOST;
+// const dbPassword = process.env.DB_PASSWORD;
+// const uri = `mongodb://${dbHost}:${dbPassword}@127.0.0.1:27017/?retryWrites=true&w=majority&appName=chat-app`;
+const uri = process.env.DB_URI || "";
 
 const clientOptions : ConnectOptions = { serverApi: { version: '1', strict: true, deprecationErrors: true } };
 
